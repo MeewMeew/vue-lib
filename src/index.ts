@@ -1,0 +1,1 @@
+export { default as HiThere } from '@/components/HiThere.vue'
