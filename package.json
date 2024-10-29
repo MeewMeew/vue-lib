@@ -1,17 +1,17 @@
 {
   "name": "@meewmeew/vue-lib",
-  "version": "0.0.2-hotfix",
+  "version": "0.0.2-hotfix2",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "./dist/mew-vue-lib.umd.js",
-  "module": "./dist/mew-vue-lib.es.js",
+  "main": "./dist/mew-vue-lib.umd.cjs",
+  "module": "./dist/mew-vue-lib.js",
   "types": "./dist/mew-vue-lib.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/mew-vue-lib.es.js",
-      "require": "./dist/mew-vue-lib.umd.js"
+      "import": "./dist/mew-vue-lib.js",
+      "require": "./dist/mew-vue-lib.umd.cjs"
     }
   },
   "publishConfig": {
