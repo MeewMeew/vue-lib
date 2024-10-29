@@ -4,7 +4,7 @@ import path from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
+import viteDts from 'vite-plugin-dts'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 
@@ -20,7 +20,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
-    cssInjectedByJsPlugin()
+    viteDts({ rollupTypes: true })
   ],
   resolve: {
     alias: {
@@ -33,7 +33,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'MewVueLib',
-      fileName: (format) => `mew-vue-lib.${format}.js`
+      fileName: (f) => `mew-vue-lib.${f}.js`
     },
     rollupOptions: {
       external: ['vue'],
