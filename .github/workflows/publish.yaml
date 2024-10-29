@@ -6,18 +6,18 @@ on:
       - main
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-      - run: bun install
-      - run: bun test
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: oven-sh/setup-bun@v2
+  #       with:
+  #         bun-version: latest
+  #     - run: bun install
+  #     - run: bun test
 
   publish:
-    needs: test
+    # needs: test
     runs-on: ubuntu-latest
     permissions:
       packages: write

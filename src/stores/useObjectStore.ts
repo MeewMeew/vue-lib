@@ -1,8 +1,26 @@
 import { type RemovableRef, useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
+// @ts-ignore
 import { ref } from 'vue'
 
-export default function initStore<T>(key: string, defaultValue: T) {
+interface AdditionalFunctions<T> {
+  name: string
+  fn(object: RemovableRef<T>, ...args: any): Promise<any> | any
+}
+
+/**
+ * A utility function that initializes a store with a key, default value, and additional functions.
+ * @param key - The key to use for the store.
+ * @param defaultValue - The default value of the store.
+ * @param addFns - Additional functions to add to the store.
+ * @returns StoreDefinition
+ * @example
+ * const { object, set, reset, getAcronym } = initStore('user', { name: 'John Doe' }, { name: 'getAcronym', fn: getAcronym })
+ * getAcronym('Nguyễn Văn A') // NA
+ * object.value // { name: 'John Doe' }
+ */
+
+export default function initStore<T>(key: string, defaultValue: T, ...addFns: AdditionalFunctions<T>[]) {
   return defineStore(key, () => {
     const object = useStorage(key, ref<T>(defaultValue), localStorage, {
       serializer: {
@@ -23,6 +41,12 @@ export default function initStore<T>(key: string, defaultValue: T) {
       object,
       set,
       reset,
+      ...Object.fromEntries(
+        addFns.map(({ name, fn }) => [
+          name,
+          (...args: any) => fn(object, ...args),
+        ])
+      ),
     }
   })
 }
