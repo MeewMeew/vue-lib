@@ -33,7 +33,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'MewVueLib',
-      fileName: (f) => `mew-vue-lib.${f}.js`
+      fileName: 'mew-vue-lib'
     },
     rollupOptions: {
       external: ['vue'],
