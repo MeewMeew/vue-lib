@@ -8,25 +8,7 @@ bun add @meewmeew/vue-lib
 npm install @meewmeew/vue-lib
 ```
 
-## Usage
-
-```vue
-<script setup lang="ts">
-import { HiThere } from '@meewmeew/vue-lib'
-</script>
-
-<template>
-  <HiThere />
-</template>
-```
-
-## Components, Utilities
-
-### Components
-
-- `HiThere`: A simple component that says "Hi there!"
-
-### Utilities
+## Utilities
 
 - `cn`: A utility function that concatenates class names.
 - `getAcronym`: A utility function that returns the acronym of a string.
