@@ -1,4 +1,3 @@
-
 type _PathParam<Path extends string> =
   // split path into individual path segments
   Path extends `${infer L}/${infer R}`
