@@ -1,5 +1,5 @@
 /**
- * @meewmeew/vue-lib v0.0.3
+ * @meewmeew/vue-lib v0.0.4-hotfix.1
  * (c) 2024 MewTheDev
  * @license MIT
  */
