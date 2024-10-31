@@ -1,20 +1,22 @@
-import { type RemovableRef, useStorage } from '@vueuse/core'
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { useStorage } from '@vueuse/core';
+import { defineStore } from 'pinia';
 
-interface AdditionalFunctions<T> {
-  name: string;
-  fn(object: RemovableRef<T>, ...args: any): Promise<any> | any;
+export interface ReturnObject<T> {
+  get: () => T;
+  set: (newObject: T) => void;
+  reset: () => void;
 }
 
-export function useStore<T>(key: string, defaultValue: T, ...addFns: AdditionalFunctions<T>[]) {
-  return defineStore(key, () => {
-    const object = useStorage(key, ref<T>(defaultValue), localStorage, {
-      serializer: {
-        read: (v: string) => JSON.parse(v) as T,
-        write: (v: any) => JSON.stringify(v),
-      },
-    });
+/**
+ * A simple object store that can be used to store and retrieve objects.
+ * @param key - The key to store the value.
+ * @param defaultValue - The default value of the store.
+ * @returns - An object containing the get, set, and reset functions.
+ */
+
+export function useStore<T>(key: string, defaultValue: T): ReturnObject<T> {
+  const storeInstance = defineStore(key, () => {
+    const object = useStorage(key, defaultValue, localStorage);
 
     function set(newObject: T) {
       object.value = newObject;
@@ -24,18 +26,16 @@ export function useStore<T>(key: string, defaultValue: T, ...addFns: AdditionalF
       object.value = defaultValue;
     }
 
+    function get() {
+      return object.value;
+    }
+
     return {
-      object,
+      get,
       set,
       reset,
-      ...Object.fromEntries(
-        addFns.map(({ name, fn }) => [
-          name,
-          function (...args: any) {
-            return fn.apply(object, args);
-          },
-        ])
-      ),
     };
   });
+
+  return storeInstance();
 }

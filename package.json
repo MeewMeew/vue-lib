@@ -1,6 +1,6 @@
 {
   "name": "@meewmeew/vue-lib",
-  "version": "0.0.4-hotfix.1",
+  "version": "0.0.4-hotfix.2",
   "type": "module",
   "files": [
     "dist"
